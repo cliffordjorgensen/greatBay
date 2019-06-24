@@ -4,7 +4,7 @@ var connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "password",
+    password: "AT&ppqs2",
     database: "greatBay_DB"
 });
 connection.connect(function(err) {
@@ -39,7 +39,8 @@ const main = function() {
                                 name: "quantity"
                             }]).then(function(res) {
                                 finalProduct.push(res.quantity);
-                                createProduct();
+                                
+                                createProduct(finalProduct[0],finalProduct[1]);
                                 console.log(finalProduct);
 
                             });
@@ -50,16 +51,17 @@ const main = function() {
             };
         });
 
-    function createProduct() {
+    function createProduct(name, quantity) {
+        console.log(name, quantity)
         console.log("Inserting a new product...\n");
-        var query = connection.query(
+        connection.query(
             "INSERT INTO product SET ?", {
-
-                name: 'finalProduct[0]',
-                quantity: 'finalProduct[1]'
+                name,
+                quantity
             },
             function(err, res) {
-                console.log(res + " product inserted!\n");
+                if(err) throw err;
+                console.log(res.affectedRows + " product inserted!\n");
                 // Call updateProduct AFTER the INSERT completes
                 // updateProduct();
             })
