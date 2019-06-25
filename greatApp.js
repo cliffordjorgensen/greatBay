@@ -137,8 +137,9 @@ const main = function() {
     };
 
     function readProducts(string) {
-        connection.query("SELECT * FROM product", function(err, res) {
+        connection.query("SELECT * FROM Great_Bay", function(err, res) {
             if (err) throw err;
+
             for (let i = 0; i < res.length; i++) {
                 if (res[i].name === string) {
                     console.log('\n\t', res[i].name);
@@ -147,9 +148,19 @@ const main = function() {
             connection.end();
         });
     };
-    // function bidderFunc(name, quantity) {
+
+
+
+    // function bidderFunc(type, name, quantity) {
     //     console.log
     // }
+
+
+
+
+
+
+
 
     // function updateProduct() {
     //     console.log("Updating all Rocky Road quantities...\n");
