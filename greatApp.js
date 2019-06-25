@@ -27,9 +27,11 @@ const main = function() {
                 name: "postMenu"
             }]).then(function(response) {
                 newItem = [];
-                newItem.push(response.postMenu)
-                console.log(newItem)
+                newTask = [];
+                newJobs = [];
+                newProj = [];
                 if (response.postMenu === "Items") {
+                    newItem.push(response.postMenu)
                     inquirer.prompt([{
                         type: 'input',
                         message: 'please enter the product name',
@@ -48,14 +50,13 @@ const main = function() {
                         });
                     });
                 } else if (response.postMenu === "Tasks") {
-                    newTask = [];
                     newTask.push(response.postMenu);
                     inquirer.prompt([{
                         type: 'input',
-                        message: 'Please enter the task name',
+                        message: 'Please enter the Task name',
                         name: 'Tasks'
                     }]).then(function(response) {
-                        newTask.push(response.name)
+                        newTask.push(response.Tasks)
                         inquirer.prompt([{
                             type: "list",
                             message: "Please select the quantity of tasks",
@@ -69,9 +70,44 @@ const main = function() {
                     });
 
                 } else if (response.postMenu === "Jobs") {
+                    newJobs.push(response.postMenu)
+                    inquirer.prompt([{
+                        type: 'input',
+                        message: 'Please enter the Job name',
+                        name: 'Jobs'
+                    }]).then(function(response) {
+                        newJobs.push(response.Jobs)
+                        inquirer.prompt([{
+                            type: "list",
+                            message: "Please select the quantity of Jobs",
+                            choices: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                            name: "quantity"
+                        }]).then(function(response) {
+                            newJobs.push(response.quantity);
+                            createProduct(newJobs[0], newJobs[1], newJobs[2]);
+                            console.log(newJobs);
+                        });
+                    });
 
                 } else if (response.postMenu === "Projects") {
-
+                    newProj.push(response.postMenu)
+                    inquirer.prompt([{
+                        type: 'input',
+                        message: 'Please enter the Project name',
+                        name: 'Projects'
+                    }]).then(function(response) {
+                        newProj.push(response.Projects)
+                        inquirer.prompt([{
+                            type: "list",
+                            message: "Please select the quantity of Projects",
+                            choices: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+                            name: "quantity"
+                        }]).then(function(response) {
+                            newProj.push(response.quantity);
+                            createProduct(newProj[0], newProj[1], newProj[2]);
+                            console.log(newProj);
+                        });
+                    });
                 }
             });
         } else if (response.menu === "\tBID ON AN ITEM") {
